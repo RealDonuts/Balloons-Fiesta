@@ -3,15 +3,15 @@ body {
     font-family: Arial, sans-serif;
     padding: 20px;
     background-image: url(background.jpg);
-    background-attachment: fixed; /* Make the background image fixed */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-size: cover; /* Ensure the image covers the entire background */
-    background-position: center; /* Center the background image */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     color: #333;
     margin: 0;
     position: relative;
     min-height: 100vh;
-    scroll-behavior: smooth; /* Smooth scrolling */
+    scroll-behavior: smooth;
 }
 
 /* Main Content */
@@ -51,7 +51,7 @@ header {
 /* Product List */
 #product-list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
     gap: 15px;
 }
 
@@ -70,15 +70,43 @@ header {
 }
 
 .product img {
-    width: 40%;
-    height: 40%;
-    object-fit: cover;
+    width: 100%; /* Make image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 200px; /* Limit maximum height */
+    object-fit: contain; /* Ensure image fits without cropping */
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
 
 .product img:hover {
     transform: scale(1.05);
+}
+
+/* Pagination */
+#pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#pagination button {
+    margin: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #2951f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#pagination button:hover {
+    background-color: #ffcc00;
+}
+
+#pagination button.active {
+    background-color: #ffcc00;
+    color: #333;
 }
 
 /* Cart Section */
