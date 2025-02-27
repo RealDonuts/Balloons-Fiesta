@@ -1,0 +1,327 @@
+/* Playful Color Scheme and Balloon Animation */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-image: url(background.jpg);
+    background-attachment: fixed; /* Make the background image fixed */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the background image */
+    color: #333;
+    margin: 0;
+    position: relative;
+    min-height: 100vh;
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Rest of your CSS remains unchanged */
+.balloon-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+/* Main Content */
+main {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 1200px;
+    overflow-y: auto;
+}
+
+/* Header and Categories */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#categories button {
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #2951f4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#categories button:hover {
+    background-color: #ffcc00;
+    transform: scale(1.1);
+}
+
+/* Product List */
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.product {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.product img:hover {
+    transform: scale(1.05);
+}
+
+/* Cart Section */
+#cart-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#cart-section.hidden {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+}
+
+/* Close Button for Cart */
+#close-cart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+#close-cart-btn:hover {
+    color: #ff0000;
+}
+
+/* Overlay Background */
+#cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    transition: opacity 0.3s ease;
+}
+
+#cart-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Checkout Form */
+#checkout-form {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    background: rgb(167, 224, 255);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    height: 200px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(248, 248, 248, 0.016);
+}
+
+.modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 10px;
+}
+
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal .close:hover {
+    color: #84e8ff;
+}
+
+/* Overlay Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+}
+
+/* Contact Dropdown Styles */
+.contact-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #4ddef7;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropbtn:hover {
+    background-color: #ffcc00;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+}
+
+.dropdown-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #cart-section, #checkout-form {
+        width: 90%;
+        right: 5%;
+        left: 5%;
+    }
+
+    .modal img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .modal span {
+        left: 45%;
+        bottom: 40%;
+    }
+}
+
+@media (max-width: 480px) {
+    #product-list {
+        grid-template-columns: 1fr;
+    }
+
+    #categories button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #cart-section {
+        width: 95%;
+        max-height: 90vh;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Accessibility Improvements */
+#categories button:focus, .dropbtn:focus, .product:focus, .modal .close:focus, #close-cart-btn:focus {
+    outline: 2px solid #2951f4;
+    outline-offset: 2px;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloons Fiesta</title>
+    <link rel="stylesheet" href="3.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Balloons Fiesta</h1>
+        <!-- Dropdown Menu -->
+        <div class="contact-dropdown">
+            <button onclick="toggleDropdown()" class="dropbtn">Contact Me</button>
+            <div id="contactDropdown" class="dropdown-content">
+                <a href="https://www.instagram.com/balloons___fiesta" target="_blank">Instagram</a>
+                <a href="tel:+1 347-278-4507">Cell: +1 347-278-4507</a>
+                <a href="mailto:balloonsfiesta824@gmail.com">Email: balloonsfiesta824@gmail.com</a>
+            </div>
+        </div>
+        <input type="text" id="search" placeholder="Search products..." onkeyup="searchProducts()" aria-label="Search products">
+        <button id="cart-toggle" onclick="toggleCart()" aria-label="Toggle shopping cart">🛒</button>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Categories Navigation -->
+        <nav id="categories">
+            <button onclick="filterCategory('all')">All</button>
+            <button onclick="filterCategory('18')">18" foil Balloons</button>
+            <button onclick="filterCategory('Balloons')">airloonz/airwalker</button>
+            <button onclick="filterCategory('decorators')">Decoration Balloons</button>
+            <button onclick="filterCategory('Helium Tank')">Helium Tanks</button>
+            <button onclick="filterCategory('Latex balloons')">Latex Balloons 10ct</button>
+            <button onclick="filterCategory('Number Balloons')">Number Balloons</button>
+            <button onclick="filterCategory('50ct')">Latex Balloons 50ct</button>
+        </nav>
+
+        <!-- Product List -->
+        <section id="product-list"></section>
+    </main>
+
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="hidden" onclick="toggleCart()"></div>
+
+    <!-- Shopping Cart Section -->
+    <section id="cart-section" class="hidden">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-list"></ul>
+        <button id="checkout-btn" onclick="showCheckoutForm()">Checkout</button>
+        <button id="close-cart-btn" class="close-btn" onclick="toggleCart()">×</button>
+        <button id="continue-shopping-btn" onclick="toggleCart()">Continue Shopping</button>
+    </section>
+
+    <!-- Checkout Form -->
+    <div id="checkout-form" class="hidden">
+        <h2>Checkout</h2>
+        <form id="order-form" onsubmit="sendOrder(event)">
+            
+            <input type="text" id="name" placeholder="Name" required>
+            
+            
+            <input type="text" id="address" placeholder="Address" required>
+            
+            
+            <input type="tel" id="phone" placeholder="Phone No." required>
+            
+            
+            <input type="email" id="email" placeholder="Email" required>
+            
+            <button type="submit">Submit Order</button>
+            <button type="button" onclick="hideCheckoutForm()">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <!-- JavaScript -->
+    <script src="4.js"></script>
+</body>
+</html>
