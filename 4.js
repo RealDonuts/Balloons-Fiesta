@@ -9,22 +9,60 @@ fetch("1.json")
         displayProducts(products);
     });
 
-// Display products on the page
-function displayProducts(products) {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = "";
-    products.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.classList.add("product");
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" onclick="viewImage('${product.image}')">
-            <h3>${product.name}</h3>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
-        `;
-        productList.appendChild(productCard);
-    });
-}
-
+    const productsPerPage = 8; // Number of products per page
+    let currentPage = 1;
+    
+    function displayProducts(page) {
+        const productList = document.getElementById("product-list");
+        productList.innerHTML = ""; // Clear existing products
+    
+        const start = (page - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        const paginatedProducts = products.slice(start, end);
+    
+        paginatedProducts.forEach(product => {
+            const productDiv = document.createElement("div");
+            productDiv.className = "product";
+            productDiv.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+            `;
+            productList.appendChild(productDiv);
+        });
+    }
+    
+    function setupPagination() {
+        const pagination = document.getElementById("pagination");
+        pagination.innerHTML = ""; // Clear existing buttons
+    
+        const totalPages = Math.ceil(products.length / productsPerPage);
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement("button");
+            button.innerText = i;
+            button.addEventListener("click", () => {
+                currentPage = i;
+                displayProducts(currentPage);
+                updatePaginationButtons();
+            });
+            pagination.appendChild(button);
+        }
+    
+        updatePaginationButtons();
+    }
+    
+    function updatePaginationButtons() {
+        const buttons = document.querySelectorAll("#pagination button");
+        buttons.forEach(button => {
+            button.classList.remove("active");
+            if (parseInt(button.innerText) === currentPage) {
+                button.classList.add("active");
+            }
+        });
+    }
+    
+    // Initialize
+    displayProducts(currentPage);
+    setupPagination();
 // Filter products by category
 function filterCategory(category) {
     const filteredProducts = category === "all" ? products : products.filter(p => p.category === category);
@@ -158,57 +196,3 @@ window.onclick = function(event) {
     }
 };
 
-const productsPerPage = 8; // Number of products per page
-let currentPage = 1;
-
-function displayProducts(page) {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Clear existing products
-
-    const start = (page - 1) * productsPerPage;
-    const end = start + productsPerPage;
-    const paginatedProducts = products.slice(start, end);
-
-    paginatedProducts.forEach(product => {
-        const productDiv = document.createElement("div");
-        productDiv.className = "product";
-        productDiv.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-        `;
-        productList.appendChild(productDiv);
-    });
-}
-
-function setupPagination() {
-    const pagination = document.getElementById("pagination");
-    pagination.innerHTML = ""; // Clear existing buttons
-
-    const totalPages = Math.ceil(products.length / productsPerPage);
-    for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement("button");
-        button.innerText = i;
-        button.addEventListener("click", () => {
-            currentPage = i;
-            displayProducts(currentPage);
-            updatePaginationButtons();
-        });
-        pagination.appendChild(button);
-    }
-
-    updatePaginationButtons();
-}
-
-function updatePaginationButtons() {
-    const buttons = document.querySelectorAll("#pagination button");
-    buttons.forEach(button => {
-        button.classList.remove("active");
-        if (parseInt(button.innerText) === currentPage) {
-            button.classList.add("active");
-        }
-    });
-}
-
-// Initialize
-displayProducts(currentPage);
-setupPagination();
