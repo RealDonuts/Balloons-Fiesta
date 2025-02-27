@@ -8,9 +8,6 @@ fetch("1.json")
         products = data;
         displayProducts(products);
     });
-
-    const productsPerPage = 8; // Number of products per page
-    let currentPage = 1;
     
     function displayProducts(page) {
         const productList = document.getElementById("product-list");
