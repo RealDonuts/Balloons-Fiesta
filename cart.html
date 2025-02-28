@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="3.css">
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <button onclick="goToShop()">Continue Shopping</button>
+    </header>
+
+    <main>
+        <section id="cart-list"></section>
+        <p id="total-price">Total: $0.00</p>
+        <button id="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+    </main>
+
+    <script src="4.js"></script>
+    <script>
+        function loadCartPage() {
+            renderCart();
+        }
+        window.onload = loadCartPage;
+    </script>
+</body>
+</html>
