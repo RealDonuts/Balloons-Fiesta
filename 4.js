@@ -1,159 +1,126 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let products = [];
 
 // Fetch products from JSON file
-fetch("1.json")
-    .then(response => response.json())
-    .then(data => {
-        products = data;
-        displayProducts(products);
-    });
+function fetchProducts() {
+    const loadingSpinner = document.getElementById("loading-spinner");
+    loadingSpinner.style.display = "flex";
+
+    fetch("1.json")
+        .then(response => response.json())
+        .then(data => {
+            products = data;
+            displayProducts(products);
+            setupPagination(products);
+            loadingSpinner.style.display = "none";
+        })
+        .catch(error => {
+            console.error("Error fetching products:", error);
+            loadingSpinner.style.display = "none";
+            alert("Failed to load products. Please try again later.");
+        });
+}
 
 // Display products on the page
-function displayProducts(products) {
+function displayProducts(productsToShow) {
     const productList = document.getElementById("product-list");
+    if (!productList) return;
     productList.innerHTML = "";
-    products.forEach(product => {
+    productsToShow.forEach(product => {
         const productCard = document.createElement("div");
         productCard.classList.add("product");
         productCard.innerHTML = `
             <img src="${product.image}" alt="${product.name}" onclick="viewImage('${product.image}')">
             <h3>${product.name}</h3>
+            <p>$${product.price.toFixed(2)}</p>
             <button onclick="addToCart(${product.id})">Add to Cart</button>
         `;
         productList.appendChild(productCard);
     });
 }
 
-// Filter products by category
-function filterCategory(category) {
-    const filteredProducts = category === "all" ? products : products.filter(p => p.category === category);
-    displayProducts(filteredProducts);
-}
-
-// Search products by name
-function searchProducts() {
-    const query = document.getElementById("search").value.toLowerCase();
-    const filteredProducts = products.filter(p => p.name.toLowerCase().includes(query));
-    displayProducts(filteredProducts);
-}
-
 // Add product to cart
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     let cartItem = cart.find(item => item.id === productId);
-
-    // Get the minimum order quantity for the category
-    const minOrder = product.minOrder || 5; // Default to 5 if minOrder is not defined
+    const minOrder = product.minOrder || 5;
 
     if (cartItem) {
-        cartItem.quantity += minOrder; // Increase quantity by the minimum order
+        cartItem.quantity += minOrder;
     } else {
-        cart.push({ ...product, quantity: minOrder }); // Add new product with minimum quantity
+        cart.push({ ...product, quantity: minOrder });
     }
     updateCart();
+    updateCartButton();
 }
 
-// Update the cart UI
+// Update the cart UI and save to localStorage
 function updateCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Update cart button with item count
+function updateCartButton() {
+    const cartButton = document.getElementById("cart-toggle");
+    if (cartButton) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartButton.innerText = `🛒 (${totalItems})`;
+    }
+}
+
+// Load cart button count on page load
+window.onload = function () {
+    fetchProducts();
+    updateCartButton();
+};
+// Render cart items
+function renderCart() {
     const cartList = document.getElementById("cart-list");
+    const totalPriceElement = document.getElementById("total-price");
+    if (!cartList || !totalPriceElement) return;
+
     cartList.innerHTML = "";
-    cart.forEach((item, index) => {
-        const cartItem = document.createElement("li");
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const cartItem = document.createElement("div");
         cartItem.classList.add("cart-item");
         cartItem.innerHTML = `
-            <img src="${item.image}" width="50">
-            ${item.name} 
-            <button onclick="decreaseQuantity(${index})">-</button>
-            <span>${item.quantity}</span>
-            <button onclick="increaseQuantity(${index})">+</button>
-            <button onclick="removeFromCart(${index})">Remove</button>
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Price: $${(item.price * item.quantity).toFixed(2)}</p>
+            <button onclick="removeFromCart(${item.id})">Remove</button>
         `;
         cartList.appendChild(cartItem);
+        totalPrice += item.price * item.quantity;
     });
+
+    totalPriceElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
 }
 
 // Remove item from cart
-function removeFromCart(index) {
-    cart.splice(index, 1);
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
     updateCart();
+    renderCart();
+    updateCartButton();
 }
 
-// Increase item quantity
-function increaseQuantity(index) {
-    const minOrder = cart[index].minOrder || 5; // Default to 5 if minOrder is not defined
-    cart[index].quantity += minOrder; // Increase quantity by the minimum order
-    updateCart();
-}
-
-// Decrease item quantity
-function decreaseQuantity(index) {
-    const minOrder = cart[index].minOrder || 5; // Default to 5 if minOrder is not defined
-    if (cart[index].quantity > minOrder) {
-        cart[index].quantity -= minOrder; // Decrease quantity by the minimum order
-    }
-    updateCart();
-}
-
-// Function to toggle the cart visibility
-function toggleCart() {
-    const cartSection = document.getElementById("cart-section");
-    const cartOverlay = document.getElementById("cart-overlay");
-    cartSection.classList.toggle("hidden");
-    cartOverlay.classList.toggle("hidden");
-}
-
-// Show checkout form
-function showCheckoutForm() {
-    const checkoutForm = document.getElementById("checkout-form");
-    checkoutForm.classList.remove("hidden");
-}
-
-// Hide checkout form
-function hideCheckoutForm() {
-    const checkoutForm = document.getElementById("checkout-form");
-    checkoutForm.classList.add("hidden");
-}
-
-// View enlarged image
-function viewImage(src) {
-    document.getElementById("modal-img").src = src;
-    document.getElementById("image-modal").style.display = "flex";
-}
-
-// Close image modal
-function closeModal() {
-    document.getElementById("image-modal").style.display = "none";
-}
-
-// Send order via email
+// Send order
 function sendOrder(event) {
     event.preventDefault();
     const name = document.getElementById("name").value;
     const address = document.getElementById("address").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
-    const cartItems = cart.map(item => `${item.name} (Quantity: ${item.quantity})`).join("%0A");
 
-    const mailtoLink = `mailto:balloonsfiesta824@gmail.com?subject=Order Request&body=Name: ${name}%0AAddress: ${address}%0APhone: ${phone}%0AEmail: ${email}%0A%0AOrder Details:%0A${cartItems}`;
-    window.location.href = mailtoLink;
+    // Simulate order submission
+    setTimeout(() => {
+        document.getElementById("order-form").classList.add("hidden");
+        document.getElementById("order-confirmation").classList.remove("hidden");
+        cart = [];
+        updateCart();
+        updateCartButton();
+    }, 1000);
 }
-
-// Toggle dropdown menu
-function toggleDropdown() {
-    const dropdown = document.getElementById("contactDropdown");
-    dropdown.classList.toggle("show");
-}
-
-// Close dropdown if user clicks outside
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-        const dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-};
