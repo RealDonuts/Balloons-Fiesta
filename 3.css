@@ -22,7 +22,7 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    color: #2951f4;
+    color: #00176c;
 }
 
 header input[type="text"] {
@@ -456,3 +456,88 @@ main {
     color: #2951f4;
     margin: 20px 0;
 }   
+/* Category Dropdown Button */
+.categories-btn {
+    background-color: #2951f4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between text and icon */
+    position: relative;
+}
+
+.categories-btn:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Dropdown Icon */
+.categories-btn::after {
+    content: "▼";
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when dropdown is open */
+.categories-btn.show::after {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Content */
+.categories-dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    transform: translateY(-10px);
+    margin-top: 10px; /* Space between button and dropdown */
+}
+
+/* Show Dropdown */
+.categories-dropdown-content.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown Links */
+.categories-dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 1px solid #f1f1f1; /* Separator between links */
+}
+
+.categories-dropdown-content a:last-child {
+    border-bottom: none; /* Remove border from the last link */
+}
+
+.categories-dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #2951f4; /* Change text color on hover */
+}
+
+/* Dropdown Arrow (Optional) */
+.categories-dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent; /* Arrow pointing up */
+}

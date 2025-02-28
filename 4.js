@@ -240,70 +240,18 @@ function showCheckoutForm() {
     checkoutForm.classList.remove("hidden");
 }
 
-async function sendOrder(event) {
+    // Send order via email
+function sendOrder(event) {
     event.preventDefault();
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const cartItems = cart.map(item => `${item.name} (Quantity: ${item.quantity})`).join("%0A");
 
-    // Get form values
-    const name = document.getElementById("name").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-
-    // Validation
-    if (!name || !address || !phone || !email) {
-        alert("Please fill out all fields.");
-        return;
-    }
-
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
-
-    // Phone number validation
-    const phonePattern = /^\d+$/;
-    if (!phonePattern.test(phone)) {
-        alert("Please enter a valid phone number (numbers only).");
-        return;
-    }
-
-    // Prepare data to send
-    const orderData = {
-        name,
-        address,
-        phone,
-        email,
-    };
-
-    try {
-        // Send data to backend
-        const response = await fetch("/submit-order", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(orderData),
-        });
-
-        if (response.ok) {
-            alert("Order submitted successfully!");
-            // Clear form fields
-            document.getElementById("name").value = "";
-            document.getElementById("address").value = "";
-            document.getElementById("phone").value = "";
-            document.getElementById("email").value = "";
-        } else {
-            alert("Failed to submit order. Please try again.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred. Please try again.");
-    }
+    const mailtoLink = `mailto:balloonsfiesta824@gmail.com?subject=Order Request&body=Name: ${name}%0AAddress: ${address}%0APhone: ${phone}%0AEmail: ${email}%0A%0AOrder Details:%0A${cartItems}`;
+    window.location.href = mailtoLink;
 }
-
-
 // Load cart button count on page load
 window.onload = function () {
     updateCartButton();
@@ -371,65 +319,16 @@ window.onclick = function (event) {
             }
         }
     }
-};async function sendOrder(event) {
+};
+// Send order via email
+function sendOrder(event) {
     event.preventDefault();
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const cartItems = cart.map(item => `${item.name} (Quantity: ${item.quantity})`).join("%0A");
 
-    // Get form values
-    const name = document.getElementById("name").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-
-    // Validation
-    if (!name || !address || !phone || !email) {
-        alert("Please fill out all fields.");
-        return;
-    }
-
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-    }
-
-    // Phone number validation
-    const phonePattern = /^\d+$/;
-    if (!phonePattern.test(phone)) {
-        alert("Please enter a valid phone number (numbers only).");
-        return;
-    }
-
-    // Prepare data to send
-    const orderData = {
-        name,
-        address,
-        phone,
-        email,
-    };
-
-    try {
-        // Send data to backend
-        const response = await fetch("/submit-order", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(orderData),
-        });
-
-        if (response.ok) {
-            alert("Order submitted successfully!");
-            // Clear form fields
-            document.getElementById("name").value = "";
-            document.getElementById("address").value = "";
-            document.getElementById("phone").value = "";
-            document.getElementById("email").value = "";
-        } else {
-            alert("Failed to submit order. Please try again.");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred. Please try again.");
-    }
+    const mailtoLink = `mailto:balloonsfiesta824@gmail.com?subject=Order Request&body=Name: ${name}%0AAddress: ${address}%0APhone: ${phone}%0AEmail: ${email}%0A%0AOrder Details:%0A${cartItems}`;
+    window.location.href = mailtoLink;
 }
