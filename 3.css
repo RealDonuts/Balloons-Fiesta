@@ -46,28 +46,47 @@ header button:hover {
     background-color: #ffcc00;
 }
 
-/* Dropdown Menu */
+/* Dropdown Container */
 .contact-dropdown {
     position: relative;
     display: inline-block;
 }
 
+/* Dropdown Button */
 .dropbtn {
     background-color: #4ddef7;
-    color: rgb(0, 0, 0);
+    color: #000;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between text and icon */
 }
 
 .dropbtn:hover {
     background-color: #ffcc00;
+    transform: scale(1.05); /* Slight scale effect on hover */
 }
 
+/* Dropdown Icon (Optional) */
+.dropbtn::after {
+    content: "▼";
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate icon when dropdown is open */
+.dropbtn.show::after {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Content */
 .dropdown-content {
-    display: none;
     position: absolute;
     background-color: white;
     min-width: 200px;
@@ -75,25 +94,47 @@ header button:hover {
     border-radius: 5px;
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
     transform: translateY(-10px);
+    margin-top: 10px; /* Space between button and dropdown */
 }
 
+/* Show Dropdown */
 .dropdown-content.show {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
 }
 
+/* Dropdown Links */
 .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 1px solid #f1f1f1; /* Separator between links */
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none; /* Remove border from the last link */
 }
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
+    color: #2951f4; /* Change text color on hover */
+}
+
+/* Dropdown Arrow (Optional) */
+.dropdown-content::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent white transparent; /* Arrow pointing up */
 }
 
 /* Main Content */
@@ -133,12 +174,12 @@ main {
 /* Product List */
 #product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
 .product {
-    background: white;
+    background: rgba(0, 255, 98, 0.311);
     padding: 10px;
     border-radius: 10px;
     text-align: center;
@@ -168,17 +209,18 @@ main {
 #pagination {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between elements */
     margin-top: 20px;
 }
 
 #pagination button {
-    margin: 5px;
     padding: 10px 15px;
-    cursor: pointer;
-    background-color: #2951f4;
-    color: white;
     border: none;
     border-radius: 5px;
+    background-color: #2951f4;
+    color: white;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -186,8 +228,14 @@ main {
     background-color: #ffcc00;
 }
 
-#pagination button.active {
-    background-color: #ffcc00;
+#pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#page-info {
+    font-size: 16px;
+    font-weight: bold;
     color: #333;
 }
 
@@ -197,7 +245,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: rgb(139, 203, 243);
     padding: 20px;
     border: 1px solid #ccc;
     width: 400px;
@@ -261,12 +309,108 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1001;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Maximum width for larger screens */
+    max-height: 90vh; /* Maximum height to fit within the viewport */
+    overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
 #checkout-form.hidden {
     opacity: 0;
     transform: translate(-50%, -60%);
     pointer-events: none;
+}
+
+/* Form Inputs */
+#order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+}
+
+#order-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+#order-form input:focus {
+    border-color: #2951f4;
+    outline: none;
+}
+
+#order-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2951f4;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#order-form button:hover {
+    background-color: #ffcc00;
+}
+
+#order-form button[type="button"] {
+    background-color: #ccc;
+    color: #333;
+}
+
+#order-form button[type="button"]:hover {
+    background-color: #999;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #cart-section, #checkout-form {
+        width: 90%;
+        right: 5%;
+        left: 5%;
+    }
+
+    .modal img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    #product-list {
+        grid-template-columns: 1fr;
+    }
+
+    #categories button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    #cart-section {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    #checkout-form {
+        width: 95%; /* Slightly smaller width for very small screens */
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    #order-form input {
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    #order-form button {
+        font-size: 14px; /* Smaller font size for mobile */
+    }
 }
 
 /* Image Modal */
@@ -303,39 +447,6 @@ main {
     color: #84e8ff;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    #product-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #cart-section, #checkout-form {
-        width: 90%;
-        right: 5%;
-        left: 5%;
-    }
-
-    .modal img {
-        max-width: 90%;
-        max-height: 90%;
-    }
-}
-
-@media (max-width: 480px) {
-    #product-list {
-        grid-template-columns: 1fr;
-    }
-
-    #categories button {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    #cart-section {
-        width: 95%;
-        max-height: 90vh;
-    }
-}
 /* Loading Spinner */
 .loading-spinner {
     display: flex;
@@ -344,40 +455,4 @@ main {
     font-size: 1.5rem;
     color: #2951f4;
     margin: 20px 0;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    #product-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #categories button {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    #cart-section {
-        width: 95%;
-        max-height: 90vh;
-    }
-}
-
-@media (max-width: 480px) {
-    #product-list {
-        grid-template-columns: 1fr;
-    }
-
-    header h1 {
-        font-size: 2rem;
-    }
-
-    header input[type="text"] {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    header button {
-        width: 100%;
-    }
-}
+}   

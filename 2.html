@@ -25,17 +25,20 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Categories Navigation -->
-        <nav id="categories">
-            <button onclick="filterCategory('all')">All</button>
-            <button onclick="filterCategory('18')">18" foil Balloons</button>
-            <button onclick="filterCategory('Balloons')">airloonz/airwalker</button>
-            <button onclick="filterCategory('decorators')">Decoration Balloons</button>
-            <button onclick="filterCategory('Helium Tank')">Helium Tanks</button>
-            <button onclick="filterCategory('Latex balloons')">Latex Balloons 10ct</button>
-            <button onclick="filterCategory('Number Balloons')">Number Balloons</button>
-            <button onclick="filterCategory('50ct')">Latex Balloons 50ct</button>
-        </nav>
+        <!-- Categories Dropdown -->
+<div class="categories-dropdown">
+    <button onclick="toggleCategoriesDropdown()" class="categories-btn">Categories </button>
+    <div id="categoriesDropdown" class="dropdown-content">
+        <button onclick="filterCategory('all')">All</button>
+        <button onclick="filterCategory('18')">18" Foil Balloons</button>
+        <button onclick="filterCategory('Balloons')">Airloonz/Airwalker</button>
+        <button onclick="filterCategory('decorators')">Decoration Balloons</button>
+        <button onclick="filterCategory('Helium Tank')">Helium Tanks</button>
+        <button onclick="filterCategory('Latex balloons')">Latex Balloons 10ct</button>
+        <button onclick="filterCategory('Number Balloons')">Number Balloons</button>
+        <button onclick="filterCategory('50ct')">Latex Balloons 50ct</button>
+    </div>
+</div>
 
         <!-- Product List -->
         <section id="product-list"></section>
