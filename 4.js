@@ -35,7 +35,7 @@ function displayProducts(productsToShow) {
 
 let currentPage = 1; // Track the current page
 
-// Setup pagination with Back and Next buttons
+// Setup pagination with only Back and Next buttons
 function setupPagination(filteredProducts) {
     const pagination = document.getElementById("pagination");
     if (!pagination) return;
@@ -62,19 +62,6 @@ function setupPagination(filteredProducts) {
         }
     });
     pagination.appendChild(backButton);
-
-    // Page number buttons
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement("button");
-        pageButton.innerText = i;
-        pageButton.disabled = i === currentPage;
-        pageButton.addEventListener("click", () => {
-            currentPage = i;
-            displayProducts(filteredProducts.slice((currentPage - 1) * 8, currentPage * 8));
-            updatePaginationUI(totalPages);
-        });
-        pagination.appendChild(pageButton);
-    }
 
     // Next button
     const nextButton = document.createElement("button");
