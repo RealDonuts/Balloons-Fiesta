@@ -254,9 +254,9 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgb(139, 203, 243);
+    background: rgb(119, 203, 255);
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #868eff;
     width: 400px;
     max-height: 80vh;
     overflow-y: auto;
@@ -311,7 +311,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: rgb(149, 213, 255);
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
