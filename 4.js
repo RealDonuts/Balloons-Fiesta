@@ -160,11 +160,9 @@ function removeFromCart(productId) {
 // Render cart items and calculate total price
 function renderCart() {
     const cartList = document.getElementById("cart-list");
-    const totalPriceElement = document.getElementById("total-price");
-    if (!cartList || !totalPriceElement) return;
+    if (!cartList) return;
 
     cartList.innerHTML = ""; // Clear the cart list
-    let totalPrice = 0;
 
     cart.forEach(item => {
         const cartItem = document.createElement("div");
@@ -177,14 +175,10 @@ function renderCart() {
                 ${item.quantity}
                 <button onclick="adjustCartQuantity(${item.id}, 1)">+</button>
             </p>
-            <p>Price: $${(item.price || 10).toFixed(2)}</p> <!-- Default price if not provided -->
             <button onclick="removeFromCart(${item.id})">Remove</button>
         `;
         cartList.appendChild(cartItem);
-        totalPrice += (item.price || 10) * item.quantity; // Default price if not provided
     });
-
-    totalPriceElement.innerText = `Total: $${totalPrice.toFixed(2)}`;
 }
 
 // Update the cart UI and save to localStorage
