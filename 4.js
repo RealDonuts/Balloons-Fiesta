@@ -125,19 +125,21 @@ function addToCart(productId) {
     const minOrder = product.minOrder || 5;
 
     if (cartItem) {
+        // If the item already exists in the cart, increase the quantity by the minimum order
         cartItem.quantity += minOrder;
     } else {
+        // If the item is not in the cart, add it with the minimum order quantity
         cart.push({ ...product, quantity: minOrder });
     }
     updateCart();
     updateCartButton();
 }
-
 // Adjust cart item quantity
 function adjustCartQuantity(productId, delta) {
     const cartItem = cart.find(item => item.id === productId);
     if (cartItem) {
-        cartItem.quantity += delta;
+        const minOrder = cartItem.minOrder || 5;
+        cartItem.quantity += delta * minOrder; // Adjust by multiples of minOrder
         if (cartItem.quantity <= 0) {
             removeFromCart(productId);
         } else {
@@ -147,7 +149,6 @@ function adjustCartQuantity(productId, delta) {
         }
     }
 }
-
 
 // Remove item from cart
 function removeFromCart(productId) {
