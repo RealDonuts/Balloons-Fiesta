@@ -507,3 +507,21 @@ main {
     border-style: solid;
     border-color: transparent transparent white transparent; /* Arrow pointing up */
 }
+.dropdown-content button{
+    color: rgb(8, 8, 8);
+    height: 40px;
+    background-color: rgb(63, 197, 254);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.dropdown-content button:hover {
+    background-color: rgb(7, 243, 255); /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+.dropdown-content button:active {
+    background-color: rgb(255, 255, 255); /* Even darker blue when clicked */
+    transform: scale(0.95); /* Slightly shrink the button */
+}
