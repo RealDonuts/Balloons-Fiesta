@@ -20,8 +20,7 @@ fetch("1.json")
 function displayProducts(productsToShow) {
     const productList = document.getElementById("product-list");
     if (!productList) return;
-    productList.innerHTML = ""; // Clear existing products
-
+    productList.innerHTML = "";
     productsToShow.forEach(product => {
         const productCard = document.createElement("div");
         productCard.classList.add("product");
@@ -33,6 +32,7 @@ function displayProducts(productsToShow) {
         productList.appendChild(productCard);
     });
 }
+
 let currentPage = 1; // Track the current page
 
 // Setup pagination with only Back and Next buttons
@@ -76,6 +76,7 @@ function setupPagination(filteredProducts) {
     });
     pagination.appendChild(nextButton);
 }
+
 // Update pagination UI (current page and button states)
 function updatePaginationUI(totalPages) {
     const pageInfo = document.getElementById("page-info");
@@ -102,6 +103,7 @@ function filterCategory(category) {
     displayProducts(filteredProducts.slice(0, 8)); // Show first 8 products
     setupPagination(filteredProducts);
 }
+
 // Search products by name with debounce
 let searchTimeout;
 
@@ -264,12 +266,13 @@ function viewImage(imageUrl) {
     });
 }
   // Toggle categories dropdown menu visibility
-  function toggleCategoriesDropdown() {
+function toggleCategoriesDropdown() {
     const dropdownContent = document.getElementById("categoriesDropdown");
     const dropbtn = document.querySelector(".categories-btn");
     dropdownContent.classList.toggle("show");
     dropbtn.classList.toggle("show"); // Toggle class for button icon
 }
+
 // Toggle contact dropdown menu visibility
 function toggleDropdown() {
     const dropdownContent = document.getElementById("contactDropdown");
