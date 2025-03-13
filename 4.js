@@ -42,7 +42,7 @@ function setupPagination(filteredProducts) {
 
     pagination.innerHTML = ""; // Clear existing pagination buttons
 
-    const totalPages = Math.ceil(filteredProducts.length / 8); // 8 products per page
+    const totalPages = Math.ceil(filteredProducts.length / 12); // 12 products per page
 
     // Display current page number
     const pageInfo = document.createElement("span");
@@ -57,7 +57,7 @@ function setupPagination(filteredProducts) {
     backButton.addEventListener("click", () => {
         if (currentPage > 1) {
             currentPage--;
-            displayProducts(filteredProducts.slice((currentPage - 1) * 8, currentPage * 8));
+            displayProducts(filteredProducts.slice((currentPage - 1) * 12, currentPage * 12));
             updatePaginationUI(totalPages);
         }
     });
@@ -70,7 +70,7 @@ function setupPagination(filteredProducts) {
     nextButton.addEventListener("click", () => {
         if (currentPage < totalPages) {
             currentPage++;
-            displayProducts(filteredProducts.slice((currentPage - 1) * 8, currentPage * 8));
+            displayProducts(filteredProducts.slice((currentPage - 1) * 12, currentPage * 12));
             updatePaginationUI(totalPages);
         }
     });
@@ -100,7 +100,7 @@ function updatePaginationUI(totalPages) {
 function filterCategory(category) {
     currentPage = 1; // Reset to the first page
     const filteredProducts = category === "all" ? products : products.filter(p => p.category === category);
-    displayProducts(filteredProducts.slice(0, 8)); // Show first 8 products
+    displayProducts(filteredProducts.slice(0, 12)); // Show first 12 products
     setupPagination(filteredProducts);
 }
 
@@ -113,7 +113,7 @@ function searchProducts() {
         currentPage = 1; // Reset to the first page
         const query = document.getElementById("search").value.toLowerCase();
         const filteredProducts = products.filter(p => p.name.toLowerCase().includes(query));
-        displayProducts(filteredProducts.slice(0, 8)); // Show first 8 products
+        displayProducts(filteredProducts.slice(0, 12)); // Show first 12 products
         setupPagination(filteredProducts);
     }, 300); // Adjust the delay as needed
 }
