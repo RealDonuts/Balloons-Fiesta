@@ -2827,5 +2827,11 @@
     {"id":446,"name":" Yellow Foil Balloon Waight","category":"waight","image":"img/yellow waight.jpg","minOrder":6},
     {"id":447,"name":" orange Foil Balloon Waight","category":"waight","image":"img/orange waight.jpg","minOrder":6},
     {"id":448,"name":" Lavender Foil Balloon Waight","category":"waight","image":"img/lavender waight.jpg","minOrder":6},
-    {"id":449,"name":" Purple Foil Balloon Waight","category":"waight","image":"img/purple waight.jpg","minOrder":6}
+    {"id":449,"name":" Purple Foil Balloon Waight","category":"waight","image":"img/purple waight.jpg","minOrder":6},
+    {"id":450,"name":"Hi-Float 96oz","category":"accessories","image":"img/96oz high float.jpg","minOrder":1},
+    {"id":450,"name":"Hi-Float 24oz","category":"accessories","image":"img/16oz high float.jpg","minOrder":1},
+    {"id":450,"name":"Hi-Float 16oz","category":"accessories","image":"img/high float.jpg","minOrder":1},
+    {"id":450,"name":"PUMP DISPENSER KIT","category":"accessories","image":"img/highfloat pump.jpg","minOrder":1},
+    {"id":450,"name":"PLASTIC STICKS 40 CM (100 PCS PER PACK)","category":"accessories","image":"img/cup and sticks.jpg","minOrder":1},
+    {"id":450,"name":"AUTO MYLAR LATEX INFLATOR","category":"accessories","image":"img/inflator.jpg","minOrder":1}
 ]
