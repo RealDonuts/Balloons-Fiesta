@@ -3419,7 +3419,7 @@
         "id": 487,
         "name": "18\" WELCOME! (36856)",
         "category": "18",
-        "image": "img/93FB.jpg",
+        "image": "img/36856.jpg",
         "minOrder": 10
     },
     {
@@ -5513,10 +5513,7 @@
     {"id":823,"name":"ROUND ORANGE PLASTIC TABLECOVER 84″ D","category":"tablecover","image":"","minOrder":12},
     {"id":824,"name":"ROUND REAL RED PLASTIC TABLECOVER 84″ D","category":"tablecover","image":"","minOrder":12},
     {"id":825,"name":"RECTANGLE  SUPER WHITE PLASTIC TABLECOVER 54″X108″","category":"tablecover","image":"","minOrder":12},
-    {"id":828,"name":"","category":"tablecover","image":"","minOrder":12},
-    {"id":829,"name":"","category":"tablecover","image":"","minOrder":12},
-    {"id":830,"name":"","category":"tablecover","image":"","minOrder":12},
-    {"id":831,"name":"","category":"tablecover","image":"","minOrder":12},
-    {"id":832,"name":"","category":"tablecover","image":"","minOrder":12},
-    {"id":833,"name":"","category":"tablecover","image":"","minOrder":12}
+    {"id":828,"name":"STAR SHAPE PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata star.jpg","minOrder":12},
+    {"id":829,"name":"CAKE SHAPE PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata cake.jpg","minOrder":12},
+    {"id":830,"name":"DRUM SHAP PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata drum.jpg","minOrder":12}
 ]
