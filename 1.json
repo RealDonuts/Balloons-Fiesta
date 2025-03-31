@@ -5515,5 +5515,7 @@
     {"id":825,"name":"RECTANGLE  SUPER WHITE PLASTIC TABLECOVER 54″X108″","category":"tablecover","image":"","minOrder":12},
     {"id":828,"name":"STAR SHAPE PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata star.jpg","minOrder":12},
     {"id":829,"name":"CAKE SHAPE PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata cake.jpg","minOrder":12},
-    {"id":830,"name":"DRUM SHAP PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata drum.jpg","minOrder":12}
+    {"id":830,"name":"DRUM SHAP PINATA (ALL CHARACTORS)","category":"pinata","image":"img/pinata drum.jpg","minOrder":12},
+    {"id":831,"name":"STRAIGHT BAMBO","category":"general","image":"img/s bamboo.jpg","minOrder":10},
+    {"id":831,"name":"CURLY BAMBO","category":"general","image":"img/curly bamboo.jpeg","minOrder":10}
 ]
